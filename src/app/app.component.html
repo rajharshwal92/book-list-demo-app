@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <span>Books</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-button (click)="addUpdateBook()">Add Book</button>
+</mat-toolbar>
+<mat-expansion-panel *ngFor="let book of books | async">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{book.title}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{book.author.givenName}}
+      
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-list>
+    <mat-list-item *ngFor="let chapter of book.chapters">
+      <h3 matLine> {{chapter.title}} </h3>
+    </mat-list-item>
+  </mat-list>
+  <mat-action-row>
+    <button mat-icon-button (click)="addUpdateBook(book)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteBook(book)">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </mat-action-row>
+
+</mat-expansion-panel>

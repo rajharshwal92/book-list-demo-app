@@ -1,0 +1,22 @@
+<form [formGroup]="bookForm" (ngSubmit)="bookForm.valid ? addNewBook() : ''">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Title" formControlName="title" required>
+      <mat-error *ngIf="bookForm.controls.title.errors && bookForm.controls.title.errors.required">Title is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="ISBN" formControlName="ISBN" required>
+      <mat-error *ngIf="bookForm.controls.ISBN.errors && bookForm.controls.ISBN.errors.required">ISBN is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [compareWith]="compareObjects" placeholder="Select" formControlName="author"  required>
+        <mat-option   [value]="author" *ngFor="let author of authors | async">{{author.givenName}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="bookForm.controls.author.errors && bookForm.controls.author.errors.required">Author is required</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button type="submit" cdkFocusInitial>Ok</button>
+  </div>
+</form>
